@@ -34,7 +34,7 @@ const ContactState = props => {
 				name: 'Alex Bradley',
 				email: 'alex@bradley.com',
 				phone: '211-2550',
-				type: 'profesional',
+				type: 'professional',
 			},
 		],
 	}
@@ -46,7 +46,9 @@ const ContactState = props => {
 			value={{
 				contacts: state.contacts,
 			}}
-		></ContactContext.Provider>
+		>
+			{props.children}
+		</ContactContext.Provider>
 	)
 }
 

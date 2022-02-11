@@ -1,6 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
+import { Navigate } from 'react-router-dom'
+import AlertContext from './../../context/alert/alertContext'
+import AuthContext from './../../context/auth/authContext'
 
-const Login = () => {
+const Login = props => {
+	const alertContext = useContext(AlertContext)
+	const authContext = useContext(AuthContext)
+
+	const { setAlert } = alertContext
+	const { login, error, clearErrors, isAuthenticated } = authContext
+
+	useEffect(() => {
+		if (isAuthenticated) {
+			return <Navigate to="/" />
+		}
+		if (error === 'Invalid credentials') {
+			setAlert(error, 'danger')
+			clearErrors()
+		}
+	}, [error, isAuthenticated, props.history])
+
 	const [user, setUser] = useState({
 		email: '',
 		password: '',
@@ -14,7 +33,14 @@ const Login = () => {
 
 	const onSubmit = e => {
 		e.preventDefault()
-		console.log('login submit')
+		if (!email || !password) {
+			setAlert('All fields are required', 'danger')
+		} else {
+			login({
+				email,
+				password,
+			})
+		}
 	}
 
 	return (

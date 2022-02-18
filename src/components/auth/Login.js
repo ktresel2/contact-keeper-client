@@ -1,18 +1,19 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import AlertContext from './../../context/alert/alertContext'
 import AuthContext from './../../context/auth/authContext'
 
 const Login = props => {
 	const alertContext = useContext(AlertContext)
 	const authContext = useContext(AuthContext)
+	let navigate = useNavigate()
 
 	const { setAlert } = alertContext
 	const { login, error, clearErrors, isAuthenticated } = authContext
 
 	useEffect(() => {
 		if (isAuthenticated) {
-			return <Navigate to="/" />
+			return navigate('/')
 		}
 		if (error === 'Invalid credentials') {
 			setAlert(error, 'danger')

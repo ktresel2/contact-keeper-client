@@ -28,7 +28,7 @@ const ContactState = props => {
 
 	const getContacts = async () => {
 		try {
-			const res = await axios.get(apiUrl + 'api/contacts')
+			const res = await axios.get(apiUrl + '/api/contacts')
 
 			dispatch({
 				type: GET_CONTACTS,
@@ -49,7 +49,7 @@ const ContactState = props => {
 			},
 		}
 		try {
-			const res = await axios.post(apiUrl + 'api/contacts', contact, config)
+			const res = await axios.post(apiUrl + '/api/contacts', contact, config)
 
 			dispatch({
 				type: ADD_CONTACT,
@@ -65,7 +65,7 @@ const ContactState = props => {
 
 	const deleteContact = async id => {
 		try {
-			await axios.delete(apiUrl + `api/contacts/${id}`)
+			await axios.delete(apiUrl + `/api/contacts/${id}`)
 
 			dispatch({
 				type: DELETE_CONTACT,
@@ -88,7 +88,7 @@ const ContactState = props => {
 		}
 		try {
 			const res = await axios.put(
-				apiUrl + `api/contacts/${contact._id}`,
+				apiUrl + `/api/contacts/${contact._id}`,
 				contact,
 				config
 			)
